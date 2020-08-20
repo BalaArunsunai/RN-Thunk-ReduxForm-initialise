@@ -1,0 +1,36 @@
+Installation steps for Sentry Crash Analysis tool
+
+1) yarn add sentry-expo
+
+2)In app.json file
+Inside expo{} add the following hook
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "infocruise",
+            "project": "kawasakidms",
+            "authToken": "07d810ad20474d398591f8a6d78f577f4bea4c52010447c3a8f432ba71c47602"
+          }
+        }
+      ]
+    }
+	
+3)In App.json file 
+Add
+import * as Sentry from 'sentry-expo';
+
+Initialize in componentDidMount or UseEffect
+
+    Sentry.init({
+      dsn:
+        'https://8b2f12153c9a4bcc8f89e6c7a5a44703@o401032.ingest.sentry.io/5260082',
+      enableInExpoDevelopment: true,
+      debug: true,
+    });
+    Sentry.captureException(new Error('Oops my first error!'));
+	
+4) Add in the Respective screens
+  Sentry.captureException(new Error('Landing page error!'));
+  Sentry.captureException(new Error('Landing page error!'));
